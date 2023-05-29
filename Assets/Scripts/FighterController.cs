@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class FighterController : MonoBehaviour
 {
+    public GameObject prefab_Beam;
+
     private Vector3 startPos; // 前フレームのマウスの位置
     private Vector3 endPos; // 現フレームのマウスの位置
     private Vector3 difPos; // 前フレームと現フレームのマウスの移動量
+
+    void Start()
+    {
+        StartCoroutine("Create_Beam");   
+    }
 
     // Update is called once per frame
     void Update()
@@ -45,5 +52,17 @@ public class FighterController : MonoBehaviour
             // 移動後の自機の位置を次のフレームのマウスの移動方向・距離の計算するスタート位置として使用
             startPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
+    }
+
+    //ビームを発生させるコルーチン
+    IEnumerator Create_Beam()
+    {
+        //ビームのプレハブをシーン上に作成する
+        Instantiate(prefab_Beam, transform.position, Quaternion.identity);
+        //プログラムを指定秒停止させる
+        yield return new WaitForSeconds(0.5f);
+
+        //再度ビームを発生させるコルーチンを呼ぶ
+        StartCoroutine("Create_Beam");
     }
 }
