@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Beam_Fighter
+  - Enemy
   layers:
   - Default
   - TransparentFX

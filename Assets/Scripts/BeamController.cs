@@ -33,4 +33,21 @@ public class BeamController : MonoBehaviour
                 break;
         }
     }
+
+    //ビームが、敵か自機に衝突した際に呼ばれる関数
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        //衝突した相手のゲームオブジェクトのタグがEnemyの場合
+        if (other.gameObject.tag == "Enemy")
+        {
+
+            //ビームのタイプbeam_Typeが1の場合
+            if (beam_Type == 1)
+            {
+                //ビームのゲームオブジェクトを削除する
+                Destroy(gameObject);
+            }
+        }
+    }
+
 }

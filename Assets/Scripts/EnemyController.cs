@@ -40,4 +40,16 @@ public class EnemyController : MonoBehaviour
                 break;
         }
     }
+
+    //敵がビームか境界に衝突した際に呼ばれる関数
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        //衝突した相手のゲームオブジェクトのタグがBeam_Figherの場合
+        if (other.gameObject.tag == "Beam_Fighter")
+        {
+            // 敵機のゲームオブジェクトを削除する
+            Destroy(gameObject);
+        }
+    }
+
 }
