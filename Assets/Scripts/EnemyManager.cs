@@ -11,6 +11,8 @@ public class EnemyManager : MonoBehaviour
     //Unity Editorから設定するPublic変数
     public GameObject prefab_Enemy1;
     public GameObject prefab_Enemy2;
+    public GameObject prefab_Enemy3;//敵ボス
+    public ScoreManager class_ScoreManager;
 
     void Start()
     {
@@ -37,7 +39,8 @@ public class EnemyManager : MonoBehaviour
         yield return new WaitForSeconds(time_Wait);
 
         //　再度敵機１を発生させるコルーチンを呼ぶ
-        StartCoroutine("Create_Enemy1");
+        if (class_ScoreManager.Get_BossMode() == false)
+            StartCoroutine("Create_Enemy1");
 
     }
 
@@ -52,7 +55,16 @@ public class EnemyManager : MonoBehaviour
                                                       Quaternion.identity);
         yield return new WaitForSeconds(time_Wait);
 
-        StartCoroutine("Create_Enemy2");
+        if (class_ScoreManager.Get_BossMode() == false)
+            StartCoroutine("Create_Enemy2");
+    }
+
+    public void Create_Boss()
+    {
+        //敵ボスを指定の場所に発生させる
+        GameObject instance = (GameObject)Instantiate(prefab_Enemy3,
+                                                      new Vector3(0.0f, 6.0f, 0.0f),
+                                                      Quaternion.identity);
     }
 
 }

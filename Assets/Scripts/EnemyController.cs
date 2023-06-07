@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public int enemy_Type;
+    public int enemy_Type;//このプログラムをつけた敵の種類(１か２)
 
-    private float speed_X;
+    private float speed_X;//敵機のx方向(横方向)の移動スピード
+    private GameObject gameManager;//Scene上のGameManagerゲームオブジェクト
 
 
     // Start is called before the first frame update
     void Start()
     {
+        //Scene上のGameManagerゲームオブジェクトを取得
+        //（自機の場合Public変数で事前に関連付けをさせたが、敵機はもともとScene上に
+        //ないので敵機が自動作成された際にScene上から取得する
+        gameManager = GameObject.Find("GameManager");
+
+        //敵機のｘ方向（横方向）の移動スピードをランダムに設定
+        //敵機の出現位置が画面中心からみて右側の場合
         if (transform.position.x >= 0)
         {
+            //斜め左に向けて移動するようにスピードを設定
             speed_X = Random.Range(-1.5f, -0.1f);
         }
         else
@@ -47,6 +56,17 @@ public class EnemyController : MonoBehaviour
         //衝突した相手のゲームオブジェクトのタグがBeam_Figherの場合
         if (other.gameObject.tag == "Beam_Fighter")
         {
+            switch (enemy_Type)
+            {
+                case 1:
+                    gameManager.GetComponent<ScoreManager>().AddScore(1);
+                    break;
+
+                case 2:
+                    gameManager.GetComponent<ScoreManager>().AddScore(2);
+                    break;
+            }
+
             // 敵機のゲームオブジェクトを削除する
             Destroy(gameObject);
         }

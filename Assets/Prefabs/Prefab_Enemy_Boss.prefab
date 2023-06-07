@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2736522343841440756}
   - component: {fileID: 6179789463659531511}
   m_Layer: 0
-  m_Name: Enemy_Boss
+  m_Name: Prefab_Enemy_Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
