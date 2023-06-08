@@ -60,7 +60,7 @@ public class FighterController : MonoBehaviour
         //ビームのプレハブをシーン上に作成する
         Instantiate(prefab_Beam, transform.position, Quaternion.identity);
         //プログラムを指定秒停止させる
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
 
         //再度ビームを発生させるコルーチンを呼ぶ
         StartCoroutine("Create_Beam");

@@ -6,8 +6,17 @@ using UnityEngine;
 public class BossConroller : MonoBehaviour
 {
     //敵ボスの移動スピード
-    private float speed_X = -0.3f;
-    private float speed_Y = -0.3f;
+    private float speed_X = -0.3f; //ボスのx方向の移動スピード
+    private float speed_Y = -0.3f; //ｙ方向
+    private GameObject gameManager; //Scene上のGameManagerゲームオブジェクト
+
+    void Start()
+    {
+        //Scene上のGameManagerゲームオブジェクトを取得
+        //（自機の場合Public変数で事前に関連付けをさせたが、敵機はもともとScene上に
+        //ないので敵機が自動作成された際にScene上から取得する
+        gameManager = GameObject.Find("GameManager");
+    }
 
     // Update is called once per frame
     void Update()
@@ -26,4 +35,26 @@ public class BossConroller : MonoBehaviour
         //　反対
         else if (transform.position.y > 4.5) speed_Y = -0.3f;
     }
+
+    //ボスがビームに衝突した際に呼ばれる関数
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        //衝突した相手のゲームオブジェクトのタグがBeam_Fighterの場合
+        if (other.gameObject.tag == "Beam_Fighter")
+        {
+            //指定のスコアを追加する関数を呼び出す
+            //→アレンジ時:ボスのHPを減らす関数に変える
+            gameManager.GetComponent<ScoreManager>().AddScore(1);
+
+            //ScoreManagerのisGameClearの値がtrueの場合
+            if (gameManager.GetComponent<ScoreManager>().Get_GameClear() == true)
+            {
+                //敵ボスのゲームオブジェクトを削除する
+                Destroy(gameObject);
+            }
+        }
+        
+        
+    }
+
 }

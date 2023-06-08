@@ -29,7 +29,7 @@ public class EnemyManager : MonoBehaviour
         //敵機１の発生させるｘ座標をランダムに設定
         float pos_Spoon_X = Random.Range(-2.5f, 2.5f);
         //次の敵機１を発生させるまでの間隔をランダムに設定
-        float time_Wait = Random.Range(1.5f, 2.0f);
+        float time_Wait = Random.Range(0.7f, 1.5f);
 
         // 敵機１を指定の場所に発生させる
         GameObject instance = (GameObject)Instantiate(prefab_Enemy1,
@@ -48,7 +48,7 @@ public class EnemyManager : MonoBehaviour
     IEnumerator Create_Enemy2()
     {
         float pos_Spoon_X = Random.Range(-2.5f, 2.5f);
-        float time_Wait = Random.Range(4f, 6f);
+        float time_Wait = Random.Range(3f, 5f);
 
         GameObject instance = (GameObject)Instantiate(prefab_Enemy2,
                                                       new Vector3(pos_Spoon_X, 5.5f, 0.0f),

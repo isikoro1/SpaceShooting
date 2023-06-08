@@ -5,7 +5,7 @@ using UnityEngine;
 //ビームを移動させる処理や自機・適期との衝突処理を実行
 public class BeamController : MonoBehaviour
 {
-    const float SPEED_Y = 3.0f;//ビーム縦方向のスピード
+    const float SPEED_Y = 6.0f;//ビーム縦方向のスピード
 
     public int beam_Type;//ビームのタイプは３種類(1,2,3)
 
