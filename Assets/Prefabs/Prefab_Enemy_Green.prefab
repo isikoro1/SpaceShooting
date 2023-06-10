@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy_Type: 1
+  prefab_Beam: {fileID: 1395562871850678560, guid: 1b7a26291736148ca85bbc94d3710118, type: 3}
 --- !u!50 &6993245647844084037
 Rigidbody2D:
   serializedVersion: 4

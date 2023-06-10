@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public int enemy_Type;//このプログラムをつけた敵の種類(１か２)
+    public GameObject prefab_Beam;//このプログラムをつけた敵が使用するビーム
 
     private float speed_X;//敵機のx方向(横方向)の移動スピード
     private GameObject gameManager;//Scene上のGameManagerゲームオブジェクト
@@ -29,6 +30,8 @@ public class EnemyController : MonoBehaviour
         {
             speed_X = Random.Range(0.1f, 1.9f);
         }
+
+        StartCoroutine("Create_Beam"); //ビームを繰り返し発生させるコルーチンを呼ぶ
     }
 
     // Update is called once per frame
@@ -70,6 +73,14 @@ public class EnemyController : MonoBehaviour
             // 敵機のゲームオブジェクトを削除する
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator Create_Beam()
+    {
+        Instantiate(prefab_Beam, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(0.5f); //プログラムを指定秒停止させる
+
+        StartCoroutine("Create_Beam"); //再度ビームを発生させるコルーチンを呼ぶ
     }
 
 }
